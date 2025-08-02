@@ -1,4 +1,4 @@
-
+// products.js
 module.exports = [
   {
     id: "jet14",
