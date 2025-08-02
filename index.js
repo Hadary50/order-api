@@ -7,6 +7,17 @@ const products = require("./products");
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+// جلب كل المنتجات
+app.get("/api/products", (req, res) => {
+  res.json(products);
+});
+
+// جلب منتج واحد بالـ id
+app.get("/api/products/:id", (req, res) => {
+  const prod = products.find(p => p.id === req.params.id);
+  if (!prod) return res.status(404).json({ success: false, message: "المنتج مش موجود" });
+  res.json(prod);
+});
 
 // enrich للعناصر بناءً على اللي في products.js
 function enrichItems(items) {
