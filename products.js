@@ -10,13 +10,5 @@ module.exports = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0R1dzesRyLMZ4JkOPNgkUfj-nPa8dc0GLww&s"
     ],
   },
-  {
-    id: "beach-buggy",
-    name: "Beach Buggy",
-    price: 3200,
-    description: "عربة شاطئ أنيقة",
-    images: [
-      "https://m.media-amazon.com/images/I/61xZZ9-Fr-S.jpg"
-    ],
-  },
+ 
 ];
