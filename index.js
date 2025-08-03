@@ -29,6 +29,7 @@ function enrichItems(items) {
         name: prod.name,
         price: prod.price,
         quantity: Number(item.quantity) || 0,
+        images: prod.images || [],
       };
     }
     return {
@@ -36,9 +37,11 @@ function enrichItems(items) {
       name: item.name || "غير معروف",
       price: Number(item.price) || 0,
       quantity: Number(item.quantity) || 0,
+      images: item.images || [],
     };
   });
 }
+
 
 function calculateTotal(items) {
   return items.reduce((sum, it) => sum + (it.price || 0) * (it.quantity || 0), 0);
@@ -49,6 +52,9 @@ function buildItemsTable(items) {
     .map(
       it => `
       <tr>
+        <td style="max-width:100px;">
+          ${it.images && it.images[0] ? `<img src="${it.images[0]}" width="80" alt="${it.name}" />` : "—"}
+        </td>
         <td>${it.name}</td>
         <td>${it.quantity}</td>
         <td>${it.price.toLocaleString()}</td>
@@ -60,6 +66,7 @@ function buildItemsTable(items) {
     <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-family: Arial, sans-serif;">
       <thead>
         <tr style="background:#f2f2f2;">
+          <th>صورة</th>
           <th>المنتج</th>
           <th>الكمية</th>
           <th>سعر الوحدة</th>
@@ -69,13 +76,14 @@ function buildItemsTable(items) {
       <tbody>
         ${rows}
         <tr>
-          <td colspan="3" style="text-align:right; font-weight:bold;">المجموع الكلي</td>
+          <td colspan="4" style="text-align:right; font-weight:bold;">المجموع الكلي</td>
           <td style="font-weight:bold;">${calculateTotal(items).toLocaleString()}</td>
         </tr>
       </tbody>
     </table>
   `;
 }
+
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
